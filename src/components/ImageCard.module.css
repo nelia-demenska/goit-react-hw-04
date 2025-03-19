@@ -1,0 +1,13 @@
+.imageCard {
+    height: 250px;
+    flex-basis: calc((100% - 20px) / 3);
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.imageCard:hover {
+    transform: scale(1.05);
+}
