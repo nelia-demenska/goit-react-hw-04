@@ -6,11 +6,13 @@ const BASE_URL = "https://api.unsplash.com/search/photos";
 export const fetchImages = async (query, page = 1) => {
   try {
     const response = await axios.get(BASE_URL, {
+      headers: {
+        Authorization: `Client-ID ${API_KEY}`,
+      },
       params: {
         query,
         page,
         per_page: 12,
-        client_id: API_KEY,
       },
     });
 
@@ -19,7 +21,7 @@ export const fetchImages = async (query, page = 1) => {
       webformatURL: img.urls.small, 
       largeImageURL: img.urls.regular, 
       tags: img.alt_description || "image", 
-    }));
+    }));;
   } catch (error) {
     console.error("Error fetching images:", error);
     return [];
