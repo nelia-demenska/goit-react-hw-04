@@ -1,12 +1,12 @@
-import ImageCard from "./ImageCard";
-import css from './ImageGallery.module.css'
+import ImageCard from "./ImageCard.jsx";
+import css from './ImageGallery.module.css';
 
-export default function ImageGallery({ images }) {
+export default function ImageGallery({ images, onImageClick }) {
     return (
-        <ul className={css.gallery} >
-        {images.map((img) => (
-        <ImageCard key={img.id} image={img} />
+    <ul className={css.gallery}>
+        {images.map((image) => (
+        <ImageCard key={image.id} image={image} onClick={() => onImageClick(image)} />
         ))}
     </ul>
     );
-};
+}

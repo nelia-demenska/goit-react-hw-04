@@ -8,5 +8,3 @@ export default function Loader() {
         </div>
     );
 };
-
-// {/* <div className={css.loader}>Loading...</div> */}

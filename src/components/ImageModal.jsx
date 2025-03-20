@@ -1,11 +1,34 @@
-import css from './ImageModal.module.css'
+import { useEffect } from "react";
+import Modal from "react-modal";
+import css from "./ImageModal.module.css";
 
-export default function ImageModal({ image, onClose }) {
+Modal.setAppElement("#root");
+
+export default function ImageModal({ isOpen, onClose, image }) {
+    useEffect(() => {
+    const handleKeyDown = (e) => {
+        if (e.key === "Escape") {
+        onClose();
+        }
+    };
+
+    if (isOpen) {
+        window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+    };
+    }, [isOpen, onClose]);
+
     return (
-    <div className={css.modalOverlay} onClick={onClose}>
-        <div className={css.modalContent}>
-            <img className={css.image} src={image.urls.regular} alt={image.alt_description} />
-        </div>
-    </div>
+    <Modal
+        isOpen={isOpen}
+        onRequestClose={onClose}
+        className={css.modal}
+        overlayClassName={css.overlay} 
+    >
+        <img className={css.image} src={image.largeImageURL} alt={image.tags} />
+    </Modal>
     );
-};
+}

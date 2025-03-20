@@ -10,10 +10,16 @@ export const fetchImages = async (query, page = 1) => {
         query,
         page,
         per_page: 12,
-        client_id: API_KEY, 
+        client_id: API_KEY,
       },
     });
-    return response.data.results;
+
+    return response.data.results.map((img) => ({
+      id: img.id,
+      webformatURL: img.urls.small, 
+      largeImageURL: img.urls.regular, 
+      tags: img.alt_description || "image", 
+    }));
   } catch (error) {
     console.error("Error fetching images:", error);
     return [];
